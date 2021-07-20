@@ -5,6 +5,8 @@ import { Command, EditorView, keymap } from '@codemirror/view'
 import { defaultTabBinding } from '@codemirror/commands'
 import { oneDark } from '@codemirror/theme-one-dark'
 
+import { selena } from './selena-language-support'
+
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
 function update (input: string, outputTo: HTMLElement): void {
@@ -55,6 +57,7 @@ const editorView = new EditorView({
   state: EditorState.create({
     extensions: [
       basicSetup,
+      selena(),
       keymap.of([
         defaultTabBinding,
         { key: 'Ctrl-s', run: updateDiagram }

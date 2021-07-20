@@ -1,0 +1,46 @@
+@top Sequence { (ObjectDefinition | Message)* }
+
+ObjectDefinition {
+  ObjectKeyword options? ObjectName "=" String
+}
+ObjectName { identifier }
+Outside { outsideIdentifier }
+
+options { "(" Option* ")" }
+Option { identifier }
+
+Message {
+  Outside? Arrow options? (Outside | ObjectName) String? MessageBlock?
+}
+
+ReturnStatement {
+  ReturnKeyword String?
+}
+
+MessageBlock { "{" Message* ReturnStatement? "}" }
+
+@tokens {
+  String { '"' !["\r\n]* '"' }
+
+  identifier { $[a-zA-Z_0-9]+ }
+  outsideIdentifier { "*" }
+
+  LineComment { "#" ![\n]* }
+
+  Arrow { "->" }
+
+  ObjectKeyword { "object" }
+  ReturnKeyword { "return" }
+
+  whitespace { std.whitespace+ }
+
+  "(" ")"
+
+  "{" "}"
+
+  "="
+}
+
+@skip { whitespace | LineComment }
+
+@detectDelim

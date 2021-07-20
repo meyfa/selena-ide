@@ -5,10 +5,11 @@
   "description": "IDE for the Selena language, a textual description of renderable UML sequence diagrams.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf \"dist/*\"",
-    "dev": "webpack --mode development",
-    "prod": "webpack --mode production",
-    "start": "webpack serve --no-hot",
+    "clean": "rimraf \"dist/*\" && rimraf \"grammar/*.js\"",
+    "build-grammar": "lezer-generator grammar/selena.grammar -o grammar/selena.js",
+    "dev": "npm run build-grammar && webpack --mode development",
+    "prod": "npm run build-grammar && webpack --mode production",
+    "start": "npm run build-grammar && webpack serve --no-hot",
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "eslint --fix --ignore-path .gitignore .",
     "test": "npm run lint"
@@ -26,6 +27,7 @@
   "dependencies": {
     "@codemirror/basic-setup": "^0.18.2",
     "@codemirror/theme-one-dark": "^0.18.1",
+    "lezer": "^0.13.5",
     "selena": "^0.1.0"
   },
   "devDependencies": {
@@ -37,6 +39,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "html-webpack-plugin": "^5.3.2",
+    "lezer-generator": "^0.13.4",
     "rimraf": "^3.0.2",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",
