@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/meyfa/selena-ide#readme",
   "dependencies": {
+    "@codemirror/basic-setup": "^0.18.2",
+    "@codemirror/theme-one-dark": "^0.18.1",
     "selena": "^0.1.0"
   },
   "devDependencies": {
