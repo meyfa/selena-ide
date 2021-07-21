@@ -11,13 +11,40 @@ html, body {
 }
 
 #header {
-  height: 35px;
+  height: 37px;
   padding: 0 12px;
-  line-height: 32px;
+  line-height: 36px;
+  font-size: 14px;
   font-weight: bold;
   background: #20222A;
   color: #EEE;
   border-bottom: 1px solid #333;
+  user-select: none;
+}
+
+.header-logo {
+  display: inline-block;
+  margin: 0 24px 0 0;
+  font-size: 16px;
+}
+
+.header-btn {
+  display: inline-block;
+  height: 28px;
+  margin: 0 8px;
+  padding: 0 12px;
+  font: inherit;
+  line-height: 1;
+  background: #282;
+  color: #FFF;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+.header-btn:hover,
+.header-btn:focus {
+  border-color: #EEE;
 }
 
 #main {
