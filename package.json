@@ -10,8 +10,8 @@
     "dev": "npm run build-grammar && webpack --mode development",
     "prod": "npm run build-grammar && webpack --mode production",
     "start": "npm run build-grammar && webpack serve --no-hot",
-    "lint": "eslint --ignore-path .gitignore .",
-    "lint-fix": "eslint --fix --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore . && stylelint ./public",
+    "lint-fix": "eslint --fix --ignore-path .gitignore . && stylelint --fix ./public",
     "test": "npm run lint"
   },
   "repository": {
@@ -41,6 +41,8 @@
     "html-webpack-plugin": "^5.3.2",
     "lezer-generator": "^0.13.4",
     "rimraf": "^3.0.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",
     "webpack": "^5.45.1",
