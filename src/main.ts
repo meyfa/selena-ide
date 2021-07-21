@@ -71,4 +71,7 @@ const editorView = new EditorView({
 
 input.appendChild(editorView.dom)
 
+const compileButton = document.getElementById('btn-compile') as HTMLButtonElement
+compileButton.addEventListener('click', () => updateDiagram(editorView))
+
 updateDiagram(editorView)
