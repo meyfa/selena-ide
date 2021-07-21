@@ -3,11 +3,18 @@ import { BrowserSvgRenderer, compileToSequence, Diagram } from 'selena'
 import { basicSetup, EditorState } from '@codemirror/basic-setup'
 import { Command, EditorView, keymap } from '@codemirror/view'
 import { defaultTabBinding } from '@codemirror/commands'
+import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 import { selena } from './selena-language-support'
+import { selenaLinter } from './selena-linter'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
+
+/**
+ * Time before linter runs, in milliseconds.
+ */
+const LINT_DELAY = 250
 
 function update (input: string, outputTo: HTMLElement): void {
   const diag = Diagram.create(compileToSequence(input))
@@ -63,6 +70,9 @@ const editorView = new EditorView({
         { key: 'Ctrl-s', run: updateDiagram }
       ]),
       EditorState.tabSize.of(2),
+      linter(selenaLinter, {
+        delay: LINT_DELAY
+      }),
       oneDark
     ],
     doc: loadDocument()
