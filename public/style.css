@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
@@ -16,8 +17,8 @@ html, body {
   line-height: 36px;
   font-size: 14px;
   font-weight: bold;
-  background: #20222A;
-  color: #EEE;
+  background: #20222a;
+  color: #eee;
   border-bottom: 1px solid #333;
   user-select: none;
 }
@@ -36,15 +37,16 @@ html, body {
   font: inherit;
   line-height: 1;
   background: #282;
-  color: #FFF;
+  color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
   outline: none;
 }
+
 .header-btn:hover,
 .header-btn:focus {
-  border-color: #EEE;
+  border-color: #eee;
 }
 
 #main {
