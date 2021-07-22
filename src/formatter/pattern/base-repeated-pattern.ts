@@ -18,16 +18,23 @@ export class BaseRepeatedPattern implements RepeatedPattern {
     return this.start.test(formatter)
   }
 
-  apply (formatter: Formatter): void {
-    this.start.apply(formatter)
+  private applyContent (formatter: Formatter): void {
     if (this.indent) {
       formatter.indent()
     }
     while (formatter.hasNext() && (this.end == null || !formatter.matches(this.end))) {
       this.content.forEach(item => item.tryApply(formatter))
     }
-    if (this.indent) formatter.dedent()
-    if (this.until != null) {
+    if (this.indent) {
+      formatter.dedent()
+    }
+  }
+
+  apply (formatter: Formatter): void {
+    // apply the start, then the content, then the closing token (if one is configured)
+    this.start.apply(formatter)
+    this.applyContent(formatter)
+    if (this.end != null) {
       formatter.append()
     }
   }

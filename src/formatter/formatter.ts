@@ -39,11 +39,11 @@ export class Formatter {
     this.options = options
   }
 
-  getResult () {
+  getResult (): string {
     return this.output.toString() + '\n'
   }
 
-  hasNext () {
+  hasNext (): boolean {
     return this.tokens.hasNext()
   }
 
@@ -56,7 +56,7 @@ export class Formatter {
     return '\n'.repeat(Math.min(newlinesAllowed, newlines))
   }
 
-  private appendToken (minimumSep: Separator) {
+  private appendToken (minimumSep: Separator): void {
     const token = this.tokens.next()
     // do not append a separator if this is the first token
     if (!this.first) {
