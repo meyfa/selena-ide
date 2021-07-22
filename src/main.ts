@@ -9,6 +9,7 @@ import { oneDark } from '@codemirror/theme-one-dark'
 import { selena } from './selena-language-support'
 import { selenaLinter } from './selena-linter'
 import { format } from './formatter/format'
+import { addToast, setupToasts, ToastType } from './toasts'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
@@ -57,6 +58,7 @@ const updateDiagram: Command = (view): boolean => {
     update(text, outputContainer)
   } catch (e) {
     console.error(e)
+    addToast('Compilation failed. Please check your input for errors.', ToastType.BAD)
   }
   return true
 }
@@ -66,7 +68,7 @@ const reformat: Command = (view): boolean => {
   try {
     const formatted = format(text)
     if (text === formatted) {
-      // nothing changed, no need to update the document
+      addToast('Source code was already properly formatted.', ToastType.GOOD)
       return true
     }
     view.dispatch({
@@ -76,8 +78,10 @@ const reformat: Command = (view): boolean => {
         insert: formatted
       }
     })
+    addToast('Source code has been formatted.', ToastType.GOOD)
   } catch (e) {
     console.error(e)
+    addToast('Formatting failed. Please check your input for errors.', ToastType.BAD)
   }
   return true
 }
@@ -103,6 +107,8 @@ const editorView = new EditorView({
 })
 
 input.appendChild(editorView.dom)
+
+setupToasts(document.getElementById('toasts') as HTMLElement)
 
 const compileButton = document.getElementById('btn-compile') as HTMLButtonElement
 compileButton.addEventListener('click', () => updateDiagram(editorView))
