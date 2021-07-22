@@ -10,6 +10,7 @@ import { selena } from './selena-language-support'
 import { selenaLinter } from './selena-linter'
 import { format } from './formatter/format'
 import { addToast, setupToasts, ToastType } from './toasts'
+import { setupPanes } from './panes'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
@@ -48,14 +49,17 @@ function saveDocument (doc: string): void {
   localStorage.setItem(LOCALSTORAGE_SAVED, doc)
 }
 
-const input = document.getElementById('input') as HTMLElement
-const outputContainer = document.getElementById('output') as HTMLElement
+const inputPane = document.getElementById('input') as HTMLElement
+const outputPane = document.getElementById('output') as HTMLElement
+const panesResizer = document.getElementById('panes-resizer') as HTMLElement
+
+setupPanes(inputPane, outputPane, panesResizer)
 
 const updateDiagram: Command = (view): boolean => {
   const text = view.state.doc.sliceString(0)
   saveDocument(text)
   try {
-    update(text, outputContainer)
+    update(text, outputPane)
   } catch (e) {
     console.error(e)
     addToast('Compilation failed. Please check your input for errors.', ToastType.BAD)
@@ -106,7 +110,7 @@ const editorView = new EditorView({
   })
 })
 
-input.appendChild(editorView.dom)
+inputPane.appendChild(editorView.dom)
 
 setupToasts(document.getElementById('toasts') as HTMLElement)
 
