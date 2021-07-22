@@ -8,6 +8,7 @@ import { oneDark } from '@codemirror/theme-one-dark'
 
 import { selena } from './selena-language-support'
 import { selenaLinter } from './selena-linter'
+import { format } from './formatter/format'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
@@ -60,6 +61,27 @@ const updateDiagram: Command = (view): boolean => {
   return true
 }
 
+const reformat: Command = (view): boolean => {
+  const text = view.state.doc.sliceString(0)
+  try {
+    const formatted = format(text)
+    if (text === formatted) {
+      // nothing changed, no need to update the document
+      return true
+    }
+    view.dispatch({
+      changes: {
+        from: 0,
+        to: view.state.doc.length,
+        insert: formatted
+      }
+    })
+  } catch (e) {
+    console.error(e)
+  }
+  return true
+}
+
 const editorView = new EditorView({
   state: EditorState.create({
     extensions: [
@@ -67,7 +89,8 @@ const editorView = new EditorView({
       selena(),
       keymap.of([
         defaultTabBinding,
-        { key: 'Ctrl-s', run: updateDiagram }
+        { key: 'Ctrl-s', run: updateDiagram },
+        { key: 'Ctrl-Alt-l', run: reformat }
       ]),
       EditorState.tabSize.of(2),
       linter(selenaLinter, {
@@ -83,5 +106,8 @@ input.appendChild(editorView.dom)
 
 const compileButton = document.getElementById('btn-compile') as HTMLButtonElement
 compileButton.addEventListener('click', () => updateDiagram(editorView))
+
+const reformatButton = document.getElementById('btn-reformat') as HTMLButtonElement
+reformatButton.addEventListener('click', () => reformat(editorView))
 
 updateDiagram(editorView)

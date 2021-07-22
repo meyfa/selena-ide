@@ -36,7 +36,7 @@ body {
   padding: 0 12px;
   font: inherit;
   line-height: 1;
-  background: #282;
+  background: #6a6a6a;
   color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -47,6 +47,10 @@ body {
 .header-btn:hover,
 .header-btn:focus {
   border-color: #eee;
+}
+
+#btn-compile {
+  background: #282;
 }
 
 #main {
