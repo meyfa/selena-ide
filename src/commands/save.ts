@@ -1,8 +1,10 @@
 import { Command } from '@codemirror/view'
-import { saveDocument } from '../storage'
+import { Storage } from '../storage'
 
-export const saveCommand: Command = (view): boolean => {
-  const text = view.state.doc.sliceString(0)
-  saveDocument(text)
-  return true
+export function createSaveCommand (storage: Storage): Command {
+  return (view): boolean => {
+    const text = view.state.doc.sliceString(0)
+    storage.save(text)
+    return true
+  }
 }

@@ -5,13 +5,13 @@ import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { debounce } from 'debounce'
 
-import { loadDocument } from './storage'
+import { Storage } from './storage'
 import { selena } from './selena-language-support'
 import { selenaLinter } from './selena-linter'
 import { setupToasts } from './toasts'
 import { setupPanes } from './panes'
 import { updatePreview } from './preview'
-import { saveCommand } from './commands/save'
+import { createSaveCommand } from './commands/save'
 import { reformatCommand } from './commands/reformat'
 import { exportPdfCommand } from './commands/export-pdf'
 
@@ -24,6 +24,9 @@ const LINT_DELAY = 250
  * Time delay after the source text changed, before the diagram is updated.
  */
 const AUTO_RECOMPILE_DELAY = 500
+
+const storage = new Storage()
+storage.load()
 
 const inputPane = document.getElementById('pane-input') as HTMLElement
 const previewPane = document.getElementById('pane-preview') as HTMLElement
@@ -41,6 +44,8 @@ const debouncedPreview = debounce(() => {
   previewErrorBox.classList.toggle('show', !success)
 }, AUTO_RECOMPILE_DELAY)
 
+const saveCommand = createSaveCommand(storage)
+
 const editorView: EditorView = new EditorView({
   state: EditorState.create({
     extensions: [
@@ -48,6 +53,7 @@ const editorView: EditorView = new EditorView({
       selena(),
       EditorView.updateListener.of((update) => {
         if (update.docChanged) {
+          storage.notifyUpdated()
           debouncedPreview()
         }
       }),
@@ -63,7 +69,7 @@ const editorView: EditorView = new EditorView({
       }),
       oneDark
     ],
-    doc: loadDocument()
+    doc: storage.load()
   })
 })
 
@@ -99,3 +105,15 @@ window.addEventListener('keydown', (event) => {
     exportPdfCommand(editorView)
   }
 })
+
+// only allow save if document is not currently saved
+
+storage.on('updated', () => {
+  saveButton.disabled = false
+})
+
+storage.on('saved', () => {
+  saveButton.disabled = true
+})
+
+saveButton.disabled = storage.saved
