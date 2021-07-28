@@ -11,6 +11,8 @@ import { selenaLinter } from './selena-linter'
 import { format } from './formatter/format'
 import { addToast, setupToasts, ToastType } from './toasts'
 import { setupPanes } from './panes'
+import { PdfRenderer } from './pdf-renderer/pdf-renderer'
+import blobStream from 'blob-stream'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
@@ -40,6 +42,26 @@ function update (input: string, outputTo: HTMLElement): void {
   }
 }
 
+function exportPdf (input: string): void {
+  const diag = Diagram.create(compileToSequence(input))
+
+  const pdfRenderer = new PdfRenderer(50, 20)
+
+  const stream = pdfRenderer.pipe(blobStream())
+  stream.on('finish', () => {
+    const url = stream.toBlobURL('application/pdf')
+    const download = document.createElement('a')
+    download.download = 'diagram.pdf'
+    download.href = url
+    download.click()
+  })
+
+  diag.layout(pdfRenderer)
+  pdfRenderer.prepare(diag.getComputedSize())
+  diag.draw(pdfRenderer)
+  pdfRenderer.finish()
+}
+
 function loadDocument (): string {
   const item = localStorage.getItem(LOCALSTORAGE_SAVED)
   return item != null ? item : ''
@@ -55,7 +77,7 @@ const panesResizer = document.getElementById('panes-resizer') as HTMLElement
 
 setupPanes(inputPane, outputPane, panesResizer)
 
-const updateDiagram: Command = (view): boolean => {
+const compileCommand: Command = (view): boolean => {
   const text = view.state.doc.sliceString(0)
   saveDocument(text)
   try {
@@ -67,7 +89,7 @@ const updateDiagram: Command = (view): boolean => {
   return true
 }
 
-const reformat: Command = (view): boolean => {
+const reformatCommand: Command = (view): boolean => {
   const text = view.state.doc.sliceString(0)
   try {
     const formatted = format(text)
@@ -90,6 +112,17 @@ const reformat: Command = (view): boolean => {
   return true
 }
 
+const exportPdfCommand: Command = (view): boolean => {
+  const text = view.state.doc.sliceString(0)
+  try {
+    exportPdf(text)
+  } catch (e) {
+    console.error(e)
+    addToast('Export failed. Please check your input for errors.', ToastType.BAD)
+  }
+  return true
+}
+
 const editorView = new EditorView({
   state: EditorState.create({
     extensions: [
@@ -97,8 +130,9 @@ const editorView = new EditorView({
       selena(),
       keymap.of([
         defaultTabBinding,
-        { key: 'Ctrl-s', run: updateDiagram },
-        { key: 'Ctrl-Alt-l', run: reformat }
+        { key: 'Ctrl-s', run: compileCommand },
+        { key: 'Ctrl-Alt-l', run: reformatCommand },
+        { key: 'Ctrl-e', run: exportPdfCommand }
       ]),
       EditorState.tabSize.of(2),
       linter(selenaLinter, {
@@ -115,9 +149,12 @@ inputPane.appendChild(editorView.dom)
 setupToasts(document.getElementById('toasts') as HTMLElement)
 
 const compileButton = document.getElementById('btn-compile') as HTMLButtonElement
-compileButton.addEventListener('click', () => updateDiagram(editorView))
+compileButton.addEventListener('click', () => compileCommand(editorView))
 
 const reformatButton = document.getElementById('btn-reformat') as HTMLButtonElement
-reformatButton.addEventListener('click', () => reformat(editorView))
+reformatButton.addEventListener('click', () => reformatCommand(editorView))
 
-updateDiagram(editorView)
+const exportButton = document.getElementById('btn-export') as HTMLButtonElement
+exportButton.addEventListener('click', () => exportPdfCommand(editorView))
+
+compileCommand(editorView)
