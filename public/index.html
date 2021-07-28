@@ -10,15 +10,20 @@
 
   <header id="header">
     <div class="header-logo">Selena IDE</div>
-    <button class="header-btn" id="btn-compile">Compile (Ctrl-S)</button>
+    <button class="header-btn" id="btn-save">Save (Ctrl-S)</button>
     <button class="header-btn" id="btn-reformat">Reformat (Ctrl-Alt-L)</button>
     <button class="header-btn" id="btn-export">Export PDF (Ctrl-E)</button>
   </header>
 
   <main id="main">
-    <div class="pane" id="input"></div>
+    <div class="pane" id="pane-input"></div>
     <div class="horizontal-resizer" id="panes-resizer"></div>
-    <div class="pane" id="output"></div>
+    <div class="pane" id="pane-preview">
+      <div id="preview"></div>
+      <div id="preview-compile-error">
+        Input contains errors
+      </div>
+    </div>
   </main>
 
   <div id="toasts"></div>

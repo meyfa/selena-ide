@@ -12,8 +12,7 @@ function setEditorContent (view: EditorView, content: string): void {
   })
 }
 
-// singleton instance
-const reformatCommand: Command = (view): boolean => {
+export const reformatCommand: Command = (view): boolean => {
   const text = view.state.doc.sliceString(0)
   try {
     const formatted = format(text)
@@ -28,8 +27,4 @@ const reformatCommand: Command = (view): boolean => {
     addToast('Formatting failed. Please check your input for errors.', ToastType.BAD)
   }
   return true
-}
-
-export function createReformatCommand (): Command {
-  return reformatCommand
 }
