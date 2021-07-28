@@ -63,3 +63,19 @@ const exportButton = document.getElementById('btn-export') as HTMLButtonElement
 exportButton.addEventListener('click', () => exportPdfCommand(editorView))
 
 compileCommand(editorView)
+
+window.addEventListener('keydown', (event) => {
+  if (event.defaultPrevented) {
+    return
+  }
+  if (event.ctrlKey && event.key === 's') {
+    event.preventDefault()
+    compileCommand(editorView)
+  } else if (event.ctrlKey && event.altKey && event.key === 'l') {
+    event.preventDefault()
+    reformatCommand(editorView)
+  } else if (event.ctrlKey && event.key === 'e') {
+    event.preventDefault()
+    exportPdfCommand(editorView)
+  }
+})
