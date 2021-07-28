@@ -28,8 +28,7 @@ function exportPdf (input: string): void {
   pdfRenderer.finish()
 }
 
-// singleton instance
-const exportPdfCommand: Command = (view): boolean => {
+export const exportPdfCommand: Command = (view): boolean => {
   const text = view.state.doc.sliceString(0)
   try {
     exportPdf(text)
@@ -38,8 +37,4 @@ const exportPdfCommand: Command = (view): boolean => {
     addToast('Export failed. Please check your input for errors.', ToastType.BAD)
   }
   return true
-}
-
-export function createExportPdfCommand (): Command {
-  return exportPdfCommand
 }

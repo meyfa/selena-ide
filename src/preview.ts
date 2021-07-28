@@ -1,7 +1,4 @@
-import { Command, EditorView } from '@codemirror/view'
-import { addToast, ToastType } from '../toasts'
 import { BrowserSvgRenderer, compileToSequence, Diagram } from 'selena'
-import { saveDocument } from '../storage'
 
 function setRenderedElement (parent: HTMLElement, element: Element): void {
   // insert the element in a way that preserves Browser scrolling
@@ -15,8 +12,13 @@ function setRenderedElement (parent: HTMLElement, element: Element): void {
   }
 }
 
-function update (input: string, outputTo: HTMLElement): void {
-  const diag = Diagram.create(compileToSequence(input))
+export function updatePreview (input: string, outputTo: HTMLElement): boolean {
+  let diag
+  try {
+    diag = Diagram.create(compileToSequence(input))
+  } catch (e) {
+    return false
+  }
 
   const svgRenderer = new BrowserSvgRenderer(50, 20)
   diag.layout(svgRenderer)
@@ -25,18 +27,5 @@ function update (input: string, outputTo: HTMLElement): void {
   const element = svgRenderer.finish()
 
   setRenderedElement(outputTo, element)
-}
-
-export function createCompileCommand (outputParent: HTMLElement): Command {
-  return (view: EditorView): boolean => {
-    const text = view.state.doc.sliceString(0)
-    saveDocument(text)
-    try {
-      update(text, outputParent)
-    } catch (e) {
-      console.error(e)
-      addToast('Compilation failed. Please check your input for errors.', ToastType.BAD)
-    }
-    return true
-  }
+  return true
 }

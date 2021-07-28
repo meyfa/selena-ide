@@ -42,9 +42,10 @@ function stopResize (): void {
 }
 
 function setPosition (position: number): void {
+  const resizerWidth = resizerElement?.offsetWidth ?? 0
   if (inputPane != null && outputPane != null) {
-    inputPane.style.width = `${position * 100}%`
-    outputPane.style.width = `${(1 - position) * 100}%`
+    inputPane.style.width = `calc(${position * 100}% - ${resizerWidth / 2}px)`
+    outputPane.style.width = `calc(${(1 - position) * 100}% - ${resizerWidth / 2}px)`
   }
 }
 

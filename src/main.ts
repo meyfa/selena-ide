@@ -3,39 +3,57 @@ import { EditorView, keymap } from '@codemirror/view'
 import { defaultTabBinding } from '@codemirror/commands'
 import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
+import { debounce } from 'debounce'
 
+import { loadDocument } from './storage'
 import { selena } from './selena-language-support'
 import { selenaLinter } from './selena-linter'
 import { setupToasts } from './toasts'
 import { setupPanes } from './panes'
-import { createCompileCommand } from './commands/compile'
-import { createReformatCommand } from './commands/reformat'
-import { createExportPdfCommand } from './commands/export-pdf'
-import { loadDocument } from './storage'
+import { updatePreview } from './preview'
+import { saveCommand } from './commands/save'
+import { reformatCommand } from './commands/reformat'
+import { exportPdfCommand } from './commands/export-pdf'
 
 /**
  * Time before linter runs, in milliseconds.
  */
 const LINT_DELAY = 250
 
-const inputPane = document.getElementById('input') as HTMLElement
-const outputPane = document.getElementById('output') as HTMLElement
+/**
+ * Time delay after the source text changed, before the diagram is updated.
+ */
+const AUTO_RECOMPILE_DELAY = 500
+
+const inputPane = document.getElementById('pane-input') as HTMLElement
+const previewPane = document.getElementById('pane-preview') as HTMLElement
 const panesResizer = document.getElementById('panes-resizer') as HTMLElement
 
-setupPanes(inputPane, outputPane, panesResizer)
+setupPanes(inputPane, previewPane, panesResizer)
 
-const compileCommand = createCompileCommand(outputPane)
-const reformatCommand = createReformatCommand()
-const exportPdfCommand = createExportPdfCommand()
+const previewContainer = document.getElementById('preview') as HTMLElement
+const previewErrorBox = document.getElementById('preview-compile-error') as HTMLElement
 
-const editorView = new EditorView({
+const debouncedPreview = debounce(() => {
+  const text = editorView.state.doc.sliceString(0)
+  const success = updatePreview(text, previewContainer)
+  previewContainer.classList.toggle('invalid', !success)
+  previewErrorBox.classList.toggle('show', !success)
+}, AUTO_RECOMPILE_DELAY)
+
+const editorView: EditorView = new EditorView({
   state: EditorState.create({
     extensions: [
       basicSetup,
       selena(),
+      EditorView.updateListener.of((update) => {
+        if (update.docChanged) {
+          debouncedPreview()
+        }
+      }),
       keymap.of([
         defaultTabBinding,
-        { key: 'Ctrl-s', run: compileCommand },
+        { key: 'Ctrl-s', run: saveCommand },
         { key: 'Ctrl-Alt-l', run: reformatCommand },
         { key: 'Ctrl-e', run: exportPdfCommand }
       ]),
@@ -53,8 +71,8 @@ inputPane.appendChild(editorView.dom)
 
 setupToasts(document.getElementById('toasts') as HTMLElement)
 
-const compileButton = document.getElementById('btn-compile') as HTMLButtonElement
-compileButton.addEventListener('click', () => compileCommand(editorView))
+const saveButton = document.getElementById('btn-save') as HTMLButtonElement
+saveButton.addEventListener('click', () => saveCommand(editorView))
 
 const reformatButton = document.getElementById('btn-reformat') as HTMLButtonElement
 reformatButton.addEventListener('click', () => reformatCommand(editorView))
@@ -62,7 +80,9 @@ reformatButton.addEventListener('click', () => reformatCommand(editorView))
 const exportButton = document.getElementById('btn-export') as HTMLButtonElement
 exportButton.addEventListener('click', () => exportPdfCommand(editorView))
 
-compileCommand(editorView)
+// preview immediately
+debouncedPreview()
+debouncedPreview.flush()
 
 window.addEventListener('keydown', (event) => {
   if (event.defaultPrevented) {
@@ -70,7 +90,7 @@ window.addEventListener('keydown', (event) => {
   }
   if (event.ctrlKey && event.key === 's') {
     event.preventDefault()
-    compileCommand(editorView)
+    saveCommand(editorView)
   } else if (event.ctrlKey && event.altKey && event.key === 'l') {
     event.preventDefault()
     reformatCommand(editorView)
