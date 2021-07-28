@@ -28,7 +28,7 @@
     "@codemirror/basic-setup": "^0.18.2",
     "@codemirror/theme-one-dark": "^0.18.1",
     "lezer": "^0.13.5",
-    "selena": "^0.1.0"
+    "selena": "^0.2.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.28.4",
