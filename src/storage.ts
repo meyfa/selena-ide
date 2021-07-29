@@ -1,10 +1,26 @@
+import { EventEmitter } from 'eventemitter3'
+
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
-export function loadDocument (): string {
-  const item = localStorage.getItem(LOCALSTORAGE_SAVED)
-  return item != null ? item : ''
-}
+export class Storage extends EventEmitter {
+  private _saved: boolean = true
 
-export function saveDocument (doc: string): void {
-  localStorage.setItem(LOCALSTORAGE_SAVED, doc)
+  get saved (): boolean {
+    return this._saved
+  }
+
+  load (): string {
+    return localStorage.getItem(LOCALSTORAGE_SAVED) ?? ''
+  }
+
+  save (doc: string): void {
+    localStorage.setItem(LOCALSTORAGE_SAVED, doc)
+    this._saved = true
+    this.emit('saved')
+  }
+
+  notifyUpdated (): void {
+    this._saved = false
+    this.emit('updated')
+  }
 }
