@@ -1,6 +1,6 @@
 // @ts-expect-error
 import { parser } from '../grammar/selena.js'
-import { foldNodeProp, foldInside, LezerLanguage, LanguageSupport } from '@codemirror/language'
+import { foldNodeProp, foldInside, LRLanguage, LanguageSupport } from '@codemirror/language'
 import { styleTags, tags as t } from '@codemirror/highlight'
 
 // The following defines CodeMirror language support for Selena.
@@ -27,7 +27,7 @@ const parserWithMetadata = parser.configure({
   ]
 })
 
-export const selenaLanguage = LezerLanguage.define({
+export const selenaLanguage = LRLanguage.define({
   parser: parserWithMetadata,
   languageData: {
     commentTokens: {

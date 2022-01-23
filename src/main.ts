@@ -1,6 +1,6 @@
 import { basicSetup, EditorState } from '@codemirror/basic-setup'
 import { EditorView, keymap } from '@codemirror/view'
-import { defaultTabBinding } from '@codemirror/commands'
+import { indentWithTab } from '@codemirror/commands'
 import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { debounce } from 'debounce'
@@ -58,7 +58,7 @@ const editorView: EditorView = new EditorView({
         }
       }),
       keymap.of([
-        defaultTabBinding,
+        indentWithTab,
         { key: 'Ctrl-s', run: saveCommand },
         { key: 'Ctrl-Alt-l', run: reformatCommand },
         { key: 'Ctrl-e', run: exportPdfCommand }
