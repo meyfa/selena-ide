@@ -1,7 +1,7 @@
 // @ts-expect-error
 import { parser } from '../grammar/selena.js'
 import { foldNodeProp, foldInside, LRLanguage, LanguageSupport } from '@codemirror/language'
-import { styleTags, tags as t } from '@codemirror/highlight'
+import { styleTags, tags as t } from '@lezer/highlight'
 
 // The following defines CodeMirror language support for Selena.
 // This is used for syntax highlighting, code folding, and perhaps more.

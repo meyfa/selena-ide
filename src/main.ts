@@ -1,5 +1,5 @@
-import { basicSetup, EditorState } from '@codemirror/basic-setup'
-import { EditorView, keymap } from '@codemirror/view'
+import { basicSetup, EditorState, EditorView } from '@codemirror/basic-setup'
+import { keymap } from '@codemirror/view'
 import { indentWithTab } from '@codemirror/commands'
 import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
