@@ -26,7 +26,7 @@
   "dependencies": {
     "@codemirror/basic-setup": "0.20.0",
     "@codemirror/theme-one-dark": "0.20.0",
-    "@lezer/highlight": "0.16.0",
+    "@lezer/highlight": "1.0.0",
     "debounce": "1.2.1",
     "events": "3.3.0",
     "lezer": "0.13.5",
