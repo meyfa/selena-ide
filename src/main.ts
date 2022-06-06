@@ -1,3 +1,5 @@
+import './style.css'
+
 import { basicSetup, EditorState, EditorView } from '@codemirror/basic-setup'
 import { keymap } from '@codemirror/view'
 import { indentWithTab } from '@codemirror/commands'
