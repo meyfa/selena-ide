@@ -31,7 +31,7 @@
     "events": "3.3.0",
     "lezer": "0.13.5",
     "pdfkit": "0.13.0",
-    "selena": "0.2.0"
+    "selena": "0.3.0"
   },
   "devDependencies": {
     "@lezer/generator": "0.16.0",
