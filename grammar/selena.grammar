@@ -32,7 +32,7 @@ MessageBlock { "{" Message* ReturnStatement? "}" }
   ObjectKeyword { "object" }
   ReturnKeyword { "return" }
 
-  whitespace { std.whitespace+ }
+  whitespace { @whitespace+ }
 
   "(" ")"
 
