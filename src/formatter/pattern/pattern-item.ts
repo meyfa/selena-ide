@@ -1,5 +1,5 @@
-import { Formatter } from '../formatter'
-import { Pattern, Separators } from './pattern'
+import { Formatter } from '../formatter.js'
+import { Pattern, Separators } from './pattern.js'
 
 export class PatternItem {
   constructor (

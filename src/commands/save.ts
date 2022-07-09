@@ -1,5 +1,5 @@
 import { Command } from '@codemirror/view'
-import { Storage } from '../storage'
+import { Storage } from '../storage.js'
 
 export function createSaveCommand (storage: Storage): Command {
   return (view): boolean => {

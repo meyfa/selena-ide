@@ -1,5 +1,5 @@
 import { TokenType } from 'selena'
-import { Formatter, Separator } from '../formatter'
+import { Formatter, Separator } from '../formatter.js'
 
 export interface Separators {
   before?: Separator

@@ -1,6 +1,6 @@
 import { Token, TokenStream, TokenType } from 'selena'
-import { IndentingStringWriter } from './indenting-string-writer'
-import { WhitespaceMemory } from './whitespace-memory'
+import { IndentingStringWriter } from './indenting-string-writer.js'
+import { WhitespaceMemory } from './whitespace-memory.js'
 
 export enum Separator {
   NONE,

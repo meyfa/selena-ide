@@ -1,8 +1,8 @@
 import { Command } from '@codemirror/view'
-import { addToast, ToastType } from '../toasts'
+import { addToast, ToastType } from '../toasts.js'
 import { compileToSequence, Diagram } from 'selena'
-import { PdfRenderer } from '../pdf-renderer/pdf-renderer'
-import { blobStream } from '../util/blob-stream'
+import { PdfRenderer } from '../pdf-renderer/pdf-renderer.js'
+import { blobStream } from '../util/blob-stream.js'
 
 function triggerDownload (url: string): void {
   const download = document.createElement('a')
