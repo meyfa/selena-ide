@@ -1,8 +1,8 @@
 import { tokenize, TokenType } from 'selena'
-import { Formatter, Separator } from './formatter'
-import { WhitespaceMemory } from './whitespace-memory'
-import { matching, matchingAnything, matchingNothing } from './pattern/patterns'
-import { Pattern } from './pattern/pattern'
+import { Formatter, Separator } from './formatter.js'
+import { WhitespaceMemory } from './whitespace-memory.js'
+import { matching, matchingAnything, matchingNothing } from './pattern/patterns.js'
+import { Pattern } from './pattern/pattern.js'
 
 function formatOptions (): Pattern {
   return matching(TokenType.PAREN_LEFT)

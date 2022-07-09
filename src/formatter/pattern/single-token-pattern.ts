@@ -1,6 +1,6 @@
 import { TokenType } from 'selena'
-import { Formatter } from '../formatter'
-import { Pattern } from './pattern'
+import { Formatter } from '../formatter.js'
+import { Pattern } from './pattern.js'
 
 export class SingleTokenPattern implements Pattern {
   constructor (

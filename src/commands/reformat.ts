@@ -1,6 +1,6 @@
 import { Command, EditorView } from '@codemirror/view'
-import { format } from '../formatter/format'
-import { addToast, ToastType } from '../toasts'
+import { format } from '../formatter/format.js'
+import { addToast, ToastType } from '../toasts.js'
 
 function setEditorContent (view: EditorView, content: string): void {
   view.dispatch({

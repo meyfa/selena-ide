@@ -1,10 +1,10 @@
 import { TokenType } from 'selena'
-import { Formatter } from '../formatter'
-import { Pattern, RepeatedPattern, Separators, SimplePattern } from './pattern'
-import { SingleTokenPattern } from './single-token-pattern'
-import { BaseRepeatedPattern } from './base-repeated-pattern'
-import { AlternativePattern } from './alternative-pattern'
-import { PatternItem } from './pattern-item'
+import { Formatter } from '../formatter.js'
+import { Pattern, RepeatedPattern, Separators, SimplePattern } from './pattern.js'
+import { SingleTokenPattern } from './single-token-pattern.js'
+import { BaseRepeatedPattern } from './base-repeated-pattern.js'
+import { AlternativePattern } from './alternative-pattern.js'
+import { PatternItem } from './pattern-item.js'
 
 export class BaseSimplePattern implements SimplePattern {
   private readonly next: PatternItem[] = []

@@ -1,8 +1,8 @@
 import { TokenType } from 'selena'
-import { Formatter } from '../formatter'
-import { Pattern, RepeatedPattern, SimplePattern } from './pattern'
-import { BaseSimplePattern } from './base-simple-pattern'
-import { PatternItem } from './pattern-item'
+import { Formatter } from '../formatter.js'
+import { Pattern, RepeatedPattern, SimplePattern } from './pattern.js'
+import { BaseSimplePattern } from './base-simple-pattern.js'
+import { PatternItem } from './pattern-item.js'
 
 export class BaseRepeatedPattern implements RepeatedPattern {
   private end: TokenType | undefined

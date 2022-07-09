@@ -1,7 +1,7 @@
 import { TokenType } from 'selena'
-import { BaseSimplePattern } from './base-simple-pattern'
-import { SingleTokenPattern } from './single-token-pattern'
-import { SimplePattern } from './pattern'
+import { BaseSimplePattern } from './base-simple-pattern.js'
+import { SingleTokenPattern } from './single-token-pattern.js'
+import { SimplePattern } from './pattern.js'
 
 export function matching (type: TokenType, value?: string): SimplePattern {
   return new BaseSimplePattern(new SingleTokenPattern(type, value, true))
