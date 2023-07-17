@@ -1,5 +1,5 @@
 import { Size, Point, DirectRenderer, LineMarker, StrokeOptions } from 'selena'
-// @ts-expect-error
+// @ts-expect-error - missing type definitions for this import
 import PDFDocument from 'pdfkit/js/pdfkit.standalone.js'
 
 function computeAngle (a: Point, b: Point): number {

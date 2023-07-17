@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-expect-error - TypeScript doesn't know about this file at lint time
 import { parser } from '../grammar/selena.js'
 import { foldNodeProp, foldInside, LRLanguage, LanguageSupport } from '@codemirror/language'
 import { styleTags, tags as t } from '@lezer/highlight'
