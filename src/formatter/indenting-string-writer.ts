@@ -10,10 +10,9 @@ export class IndentingStringWriter {
 
   write (str: string): this {
     const lines = str.split('\n')
-    for (let i = 0; i < lines.length - 1; ++i) {
-      this.writeLine(lines[i], true)
+    for (const [index, line] of str.split('\n').entries()) {
+      this.writeLine(line, index < lines.length - 1)
     }
-    this.writeLine(lines[lines.length - 1], false)
     return this
   }
 
