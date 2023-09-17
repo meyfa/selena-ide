@@ -109,8 +109,24 @@ export class PdfRenderer implements DirectRenderer<PDFKit.PDFDocument> {
     }
     this.doc.stroke('black')
     this.doc.restore()
-    this.renderMarker(end1, points[0], computeAngle(points[0], points[1]), lineWidth)
-    this.renderMarker(end2, points[points.length - 1], computeAngle(points[points.length - 2], points[points.length - 1]), lineWidth)
+    this.renderStartMarker(points, end1, lineWidth)
+    this.renderEndMarker(points, end2, lineWidth)
+  }
+
+  private renderStartMarker (points: Point[], marker: LineMarker, lineWidth: number): void {
+    const position = points.at(0)
+    const nextPosition = points.at(1)
+    if (position != null && nextPosition != null) {
+      this.renderMarker(marker, position, computeAngle(position, nextPosition), lineWidth)
+    }
+  }
+
+  private renderEndMarker (points: Point[], marker: LineMarker, lineWidth: number): void {
+    const position = points.at(-1)
+    const previousPosition = points.at(-2)
+    if (position != null && previousPosition != null) {
+      this.renderMarker(marker, position, computeAngle(previousPosition, position), lineWidth)
+    }
   }
 
   renderPath (data: string, offset: Point, options?: StrokeOptions): void {
