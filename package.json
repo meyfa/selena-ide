@@ -36,7 +36,7 @@
     "debounce": "1.2.1",
     "events": "3.3.0",
     "pdfkit": "0.13.0",
-    "selena": "0.4.2"
+    "selena": "0.4.3"
   },
   "devDependencies": {
     "@lezer/generator": "1.5.0",
