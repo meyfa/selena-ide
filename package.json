@@ -39,7 +39,7 @@
     "selena": "0.4.3"
   },
   "devDependencies": {
-    "@lezer/generator": "1.5.0",
+    "@lezer/generator": "1.5.1",
     "@meyfa/eslint-config": "4.0.1",
     "@types/debounce": "1.2.1",
     "@types/events": "3.0.0",
