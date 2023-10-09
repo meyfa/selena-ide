@@ -45,7 +45,7 @@
     "@types/events": "3.0.1",
     "@types/pdfkit": "0.12.12",
     "eslint": "8.51.0",
-    "rimraf": "5.0.1",
+    "rimraf": "5.0.5",
     "stylelint": "15.10.3",
     "stylelint-config-standard": "34.0.0",
     "typescript": "5.2.2",
