@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "IDE for the Selena language, a textual description of renderable UML sequence diagrams.",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist && rimraf \"grammar/*.js\"",
     "build-grammar": "lezer-generator grammar/selena.grammar -o grammar/selena.js",
