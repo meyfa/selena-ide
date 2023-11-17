@@ -35,14 +35,14 @@
     "codemirror": "6.0.1",
     "debounce": "2.0.0",
     "events": "3.3.0",
-    "pdfkit": "0.13.0",
+    "pdfkit": "0.14.0",
     "selena": "0.4.3"
   },
   "devDependencies": {
     "@lezer/generator": "1.5.1",
     "@meyfa/eslint-config": "4.0.1",
     "@types/events": "3.0.1",
-    "@types/pdfkit": "0.13.0",
+    "@types/pdfkit": "0.13.2",
     "eslint": "8.53.0",
     "rimraf": "5.0.5",
     "stylelint": "15.11.0",
