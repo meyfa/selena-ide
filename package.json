@@ -41,7 +41,6 @@
   "devDependencies": {
     "@lezer/generator": "1.5.1",
     "@meyfa/eslint-config": "4.0.1",
-    "@types/debounce": "1.2.2",
     "@types/events": "3.0.1",
     "@types/pdfkit": "0.13.0",
     "eslint": "8.53.0",

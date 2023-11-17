@@ -6,7 +6,7 @@ import { keymap } from '@codemirror/view'
 import { indentWithTab } from '@codemirror/commands'
 import { linter } from '@codemirror/lint'
 import { oneDark } from '@codemirror/theme-one-dark'
-import { debounce } from 'debounce'
+import debounce from 'debounce'
 
 import { Storage } from './storage.js'
 import { selena } from './selena-language-support.js'
