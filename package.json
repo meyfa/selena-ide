@@ -33,7 +33,7 @@
     "@lezer/highlight": "1.1.6",
     "@lezer/lr": "1.3.13",
     "codemirror": "6.0.1",
-    "debounce": "1.2.1",
+    "debounce": "2.0.0",
     "events": "3.3.0",
     "pdfkit": "0.13.0",
     "selena": "0.4.3"
@@ -41,7 +41,6 @@
   "devDependencies": {
     "@lezer/generator": "1.5.1",
     "@meyfa/eslint-config": "4.0.1",
-    "@types/debounce": "1.2.2",
     "@types/events": "3.0.1",
     "@types/pdfkit": "0.13.0",
     "eslint": "8.53.0",
