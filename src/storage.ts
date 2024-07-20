@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { EventEmitter } from 'events'
 
 const LOCALSTORAGE_SAVED = 'seq.save.input'
