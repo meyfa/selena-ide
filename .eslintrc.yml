@@ -1,8 +1,0 @@
-extends: '@meyfa/eslint-config'
-
-parserOptions:
-  project: './tsconfig.json'
-
-ignorePatterns:
-  - dist
-  - '*.js'

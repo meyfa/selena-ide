@@ -9,8 +9,8 @@
     "build-grammar": "lezer-generator grammar/selena.grammar -o grammar/selena.js",
     "prod": "npm run build-grammar && vite build",
     "start": "npm run build-grammar && vite dev",
-    "lint": "tsc --noEmit && eslint --ignore-path .gitignore .",
-    "lint-fix": "tsc --noEmit && eslint --fix --ignore-path .gitignore .",
+    "lint": "tsc --noEmit && eslint .",
+    "lint-fix": "tsc --noEmit && eslint --fix .",
     "test": "npm run lint"
   },
   "repository": {
@@ -40,12 +40,12 @@
   },
   "devDependencies": {
     "@lezer/generator": "1.7.1",
-    "@meyfa/eslint-config": "7.0.0",
+    "@meyfa/eslint-config": "8.0.0",
     "@types/events": "3.0.3",
-    "@types/pdfkit": "0.13.4",
-    "eslint": "8.57.1",
+    "@types/pdfkit": "0.13.5",
+    "eslint": "9.12.0",
     "rimraf": "6.0.1",
-    "typescript": "5.6.2",
+    "typescript": "5.6.3",
     "vite": "5.4.8"
   }
 }
