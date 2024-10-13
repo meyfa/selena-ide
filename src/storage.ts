@@ -4,7 +4,7 @@ import { EventEmitter } from 'events'
 const LOCALSTORAGE_SAVED = 'seq.save.input'
 
 export class Storage extends EventEmitter {
-  private _saved: boolean = true
+  private _saved = true
 
   get saved (): boolean {
     return this._saved

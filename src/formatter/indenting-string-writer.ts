@@ -1,8 +1,8 @@
 export class IndentingStringWriter {
   private readonly indentWith: string
 
-  private out: string = ''
-  indentation: number = 0
+  private out = ''
+  indentation = 0
 
   constructor (indentWith = '\t') {
     this.indentWith = indentWith

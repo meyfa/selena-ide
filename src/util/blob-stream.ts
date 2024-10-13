@@ -12,7 +12,7 @@ export interface BlobStream extends NodeJS.WritableStream {
 
 type StreamCallback = (err?: Error | null) => void
 
-function isCallback (foo: StreamCallback | unknown): foo is StreamCallback {
+function isCallback (foo: unknown): foo is StreamCallback {
   return typeof foo === 'function'
 }
 
@@ -68,7 +68,7 @@ class BlobStreamImpl extends EventEmitter implements BlobStream {
     return this
   }
 
-  toBlob (type: string = 'application/octet-stream'): Blob {
+  toBlob (type = 'application/octet-stream'): Blob {
     if (this.blob == null) {
       this.blob = new Blob(this.chunks, { type })
       // free memory

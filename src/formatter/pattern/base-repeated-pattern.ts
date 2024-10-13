@@ -6,7 +6,7 @@ import { PatternItem } from './pattern-item.js'
 
 export class BaseRepeatedPattern implements RepeatedPattern {
   private end: TokenType | undefined
-  private indent: boolean = false
+  private indent = false
 
   constructor (
     private readonly start: Pattern,
@@ -23,7 +23,7 @@ export class BaseRepeatedPattern implements RepeatedPattern {
       formatter.indent()
     }
     while (formatter.hasNext() && (this.end == null || !formatter.matches(this.end))) {
-      this.content.forEach(item => item.tryApply(formatter))
+      this.content.forEach((item) => item.tryApply(formatter))
     }
     if (this.indent) {
       formatter.dedent()
