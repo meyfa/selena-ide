@@ -63,12 +63,12 @@ export function setupPanes (input: HTMLElement, output: HTMLElement, resizer: HT
 
   setPosition(PREFERRED_PANE_POSITION)
 
-  resizerElement?.addEventListener('pointerdown', event => {
+  resizerElement.addEventListener('pointerdown', (event) => {
     event.preventDefault()
     startResize()
   })
 
-  window.addEventListener('pointerup', event => {
+  window.addEventListener('pointerup', (event) => {
     if (resizing) {
       event.preventDefault()
       stopResize()

@@ -20,7 +20,7 @@ export class BaseSimplePattern implements SimplePattern {
 
   apply (formatter: Formatter): void {
     this.start.apply(formatter)
-    this.next.forEach(item => item.tryApply(formatter))
+    this.next.forEach((item) => item.tryApply(formatter))
   }
 
   any (sep: Separators): this {

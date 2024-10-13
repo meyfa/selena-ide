@@ -28,17 +28,24 @@ const LINT_DELAY = 250
  */
 const AUTO_RECOMPILE_DELAY = 500
 
+function assertNonNull<T> (value: T): NonNullable<T> {
+  if (value == null) {
+    throw new Error('Expected non-null value')
+  }
+  return value
+}
+
 const storage = new Storage()
 storage.load()
 
-const inputPane = document.getElementById('pane-input') as HTMLElement
-const previewPane = document.getElementById('pane-preview') as HTMLElement
-const panesResizer = document.getElementById('panes-resizer') as HTMLElement
+const inputPane = assertNonNull(document.getElementById('pane-input'))
+const previewPane = assertNonNull(document.getElementById('pane-preview'))
+const panesResizer = assertNonNull(document.getElementById('panes-resizer'))
 
 setupPanes(inputPane, previewPane, panesResizer)
 
-const previewContainer = document.getElementById('preview') as HTMLElement
-const previewErrorBox = document.getElementById('preview-compile-error') as HTMLElement
+const previewContainer = assertNonNull(document.getElementById('preview'))
+const previewErrorBox = assertNonNull(document.getElementById('preview-compile-error'))
 
 const debouncedPreview = debounce(() => {
   const text = editorView.state.doc.sliceString(0)
@@ -78,7 +85,7 @@ const editorView: EditorView = new EditorView({
 
 inputPane.appendChild(editorView.dom)
 
-setupToasts(document.getElementById('toasts') as HTMLElement)
+setupToasts(assertNonNull(document.getElementById('toasts')))
 
 const saveButton = document.getElementById('btn-save') as HTMLButtonElement
 saveButton.addEventListener('click', () => saveCommand(editorView))

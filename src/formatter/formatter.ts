@@ -30,7 +30,7 @@ export class Formatter {
 
   private readonly output = new IndentingStringWriter()
 
-  private first: boolean = true
+  private first = true
   private bufferedSeparator: Separator = Separator.NONE
 
   constructor (tokens: TokenStream, whitespace: WhitespaceMemory, options: FormatterOptions) {

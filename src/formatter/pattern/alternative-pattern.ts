@@ -8,7 +8,7 @@ export class AlternativePattern implements Pattern {
   }
 
   test (formatter: Formatter): boolean {
-    return this.options.some(option => option().test(formatter))
+    return this.options.some((option) => option().test(formatter))
   }
 
   apply (formatter: Formatter): void {
