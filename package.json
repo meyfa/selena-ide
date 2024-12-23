@@ -42,10 +42,10 @@
     "@lezer/generator": "1.7.2",
     "@meyfa/eslint-config": "8.0.1",
     "@types/events": "3.0.3",
-    "@types/pdfkit": "0.13.7",
+    "@types/pdfkit": "0.13.8",
     "eslint": "9.17.0",
     "rimraf": "6.0.1",
     "typescript": "5.7.2",
-    "vite": "6.0.3"
+    "vite": "6.0.5"
   }
 }
