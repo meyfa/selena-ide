@@ -39,13 +39,13 @@
     "selena": "0.4.3"
   },
   "devDependencies": {
-    "@lezer/generator": "1.7.2",
+    "@lezer/generator": "1.7.3",
     "@meyfa/eslint-config": "8.0.1",
     "@types/events": "3.0.3",
     "@types/pdfkit": "0.13.9",
-    "eslint": "9.21.0",
+    "eslint": "9.25.0",
     "rimraf": "6.0.1",
-    "typescript": "5.7.3",
-    "vite": "6.1.1"
+    "typescript": "5.8.3",
+    "vite": "6.3.2"
   }
 }
