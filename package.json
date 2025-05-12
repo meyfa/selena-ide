@@ -29,7 +29,7 @@
     "@codemirror/lint": "6.8.5",
     "@codemirror/state": "6.5.2",
     "@codemirror/theme-one-dark": "6.1.2",
-    "@codemirror/view": "6.36.5",
+    "@codemirror/view": "6.36.8",
     "@lezer/highlight": "1.2.1",
     "@lezer/lr": "1.4.2",
     "codemirror": "6.0.1",
