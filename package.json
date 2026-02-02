@@ -35,7 +35,7 @@
     "codemirror": "6.0.1",
     "debounce": "3.0.0",
     "events": "3.3.0",
-    "pdfkit": "0.17.1",
+    "pdfkit": "0.17.2",
     "selena": "0.4.3"
   },
   "devDependencies": {
