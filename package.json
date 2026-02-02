@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@lezer/generator": "1.7.3",
-    "@meyfa/eslint-config": "8.0.1",
+    "@meyfa/eslint-config": "9.0.0",
     "@types/events": "3.0.3",
     "@types/pdfkit": "0.13.9",
     "eslint": "9.28.0",
