@@ -70,7 +70,7 @@ class BlobStreamImpl extends EventEmitter implements BlobStream {
 
   toBlob (type = 'application/octet-stream'): Blob {
     if (this.blob == null) {
-      this.blob = new Blob(this.chunks, { type })
+      this.blob = new Blob(this.chunks as BlobPart[], { type })
       // free memory
       this.chunks.splice(0, this.chunks.length)
     }
