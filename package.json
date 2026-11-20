@@ -33,7 +33,7 @@
     "@lezer/highlight": "1.2.4",
     "@lezer/lr": "1.4.8",
     "codemirror": "6.0.2",
-    "debounce": "3.0.0",
+    "debounce": "4.0.0",
     "events": "3.3.0",
     "pdfkit": "0.18.0",
     "selena": "0.4.3"
